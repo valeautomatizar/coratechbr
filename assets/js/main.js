@@ -44,6 +44,15 @@ function applyConfig() {
     else el.closest('li')?.remove();
   });
   $$('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
+  $$('[data-quero]').forEach((a) => { a.href = queroLink(a.dataset.quero); });
+}
+
+/* Botões "Quero isso para mim!": abrem o WhatsApp contando o que a pessoa viu */
+function queroLink(tema) {
+  const texto = tema
+    ? `Olá! Vi no site da Coratech ${tema} e quero isso para mim! Podemos conversar?`
+    : 'Olá! Vi o site da Coratech e quero isso para mim! Podemos conversar?';
+  return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`;
 }
 
 /* Cabeçalho: fundo ao rolar, esconde ao descer e mostra ao subir */
@@ -263,6 +272,8 @@ function lightbox() {
     $('.lightbox__cap small', box).textContent = $('small', it).textContent;
     $('.lightbox__cap h3', box).textContent = $('h3', it).textContent;
     $('.lightbox__cap span', box).textContent = `${i + 1} / ${items.length}`;
+    const quero = $('.lightbox__cap [data-quero]', box);
+    if (quero) quero.href = queroLink(`a foto "${$('h3', it).textContent}"`);
   };
   const open = (n) => {
     lastFocus = document.activeElement;
