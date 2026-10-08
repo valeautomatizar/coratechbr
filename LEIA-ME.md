@@ -102,3 +102,9 @@ python3 -m http.server 8000
 ```
 
 e abra http://localhost:8000
+
+## Página de links (bio do Instagram)
+
+Fica na pasta separada `coratech-links/`, publicada como **outro projeto** na Vercel,
+com o domínio `links.coratechbr.com`. Ela tem sua própria cópia do `main.js`:
+se mudar WhatsApp, e-mail ou endereço, altere o `CONFIG` nos dois projetos.

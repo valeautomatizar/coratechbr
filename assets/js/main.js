@@ -36,7 +36,8 @@ function applyConfig() {
     mapa: CONFIG.endereco && `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONFIG.endereco)}`,
   };
   $$('[data-link]').forEach((a) => {
-    if (links[a.dataset.link]) a.href = links[a.dataset.link];
+    if (a.dataset.link === 'whatsapp' && a.dataset.msg) a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(a.dataset.msg)}`;
+    else if (links[a.dataset.link]) a.href = links[a.dataset.link];
     else a.remove(); // sem dado no CONFIG: esconde o link
   });
   $$('[data-text]').forEach((el) => {
@@ -60,6 +61,7 @@ function header() {
   const h = $('.header');
   const bar = $('.progress');
   const wa = $('.wa-float');
+  if (!h) return;
   let last = 0;
   const onScroll = () => {
     const y = window.scrollY;
